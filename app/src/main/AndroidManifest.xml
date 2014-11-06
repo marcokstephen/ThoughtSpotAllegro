@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ResourceDetails"
+            android:label="@string/title_activity_resource_details"
+            android:parentActivityName=".MyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sm.com.httesting.MyActivity" />
+        </activity>
     </application>
 
 </manifest>

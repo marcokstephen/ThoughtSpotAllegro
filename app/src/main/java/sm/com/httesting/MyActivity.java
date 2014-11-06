@@ -23,7 +23,7 @@ public class MyActivity extends FragmentActivity {
     ActionBarDrawerToggle mDrawerToggle;
     public static String[] sectionTitles = {"All Categories","    Legal & Financial","    Health & Social",
             "    Recreation & Culture","    Family & Friends","    Spirituality & Wellbeing",
-            "    Work & School","    Sex & Relationships","Suggest a Place","Favourites"};
+            "    Work & School","    Sex & Relationships","Suggest a Place","Favourites","Chatrooms"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,13 @@ public class MyActivity extends FragmentActivity {
                 mDrawerList.setItemChecked(i, true);
                 mDrawerLayout.closeDrawer(mDrawerList);
                 Fragment fragment;
-                if (i == 8) { //this is the "Suggest a Place" fragment, we need to use a map
-                              //instead of the regular result
+                if (i == 8) {
+                    //this is the "Suggest a Place" fragment, we need to use a map
+                    //instead of the regular result
                     fragment = new SuggestPlaceFragment();
+                } else if (i == 10) {
+                    //This is the "Chat" fragment, we use a different fragment than normal
+                    fragment = new ChatFragment();
                 } else {
                     fragment = ResourceListFragment.newInstance(i);
                 }

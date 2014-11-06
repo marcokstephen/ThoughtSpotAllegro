@@ -71,6 +71,8 @@ public class MyActivity extends FragmentActivity {
             }
         });
 
+        //Allowing the NavigationDrawer to be called by pressing the title
+        //in the action bar, for better accessibility
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer,R.string.hello_world,R.string.hello_world);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -100,6 +102,7 @@ public class MyActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        //required to make the button open the NavDrawer
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         } else if (id == R.id.action_settings) {

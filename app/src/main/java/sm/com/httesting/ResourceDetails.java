@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+//This activity gives further details about
+//each listing returned by ThoughtSpot
 public class ResourceDetails extends Activity {
 
     @Override

@@ -34,6 +34,7 @@ public class SuggestPlaceFragment extends Fragment {
         public View onCreateView(LayoutInflater arg0, ViewGroup arg1, Bundle arg2){
             View v = super.onCreateView(arg0,arg1,arg2);
             mMap = getMap();
+            //make the default location of the camera to be the Toronto area
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43.6426,-79.3871), 12));
             return v;
         }

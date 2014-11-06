@@ -2,7 +2,9 @@ package sm.com.httesting;
 
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ public class MyActivity extends FragmentActivity {
     DrawerLayout mDrawerLayout;
     ListView mDrawerList;
     ActionBar actionBar;
+    ActionBarDrawerToggle mDrawerToggle;
     public static String[] sectionTitles = {"All Categories","    Legal & Financial","    Health & Social",
             "    Recreation & Culture","    Family & Friends","    Spirituality & Wellbeing",
             "    Work & School","    Sex & Relationships","Suggest a Place","Favourites"};
@@ -59,6 +62,24 @@ public class MyActivity extends FragmentActivity {
                 mDrawerLayout.closeDrawer(mDrawerList);
             }
         });
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer,R.string.hello_world,R.string.hello_world);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -70,7 +91,9 @@ public class MyActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        } else if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);

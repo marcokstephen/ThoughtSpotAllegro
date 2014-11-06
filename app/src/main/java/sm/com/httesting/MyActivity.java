@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MyActivity extends ActionBarActivity {
+public class MyActivity extends FragmentActivity {
 
     DrawerLayout mDrawerLayout;
     ListView mDrawerList;

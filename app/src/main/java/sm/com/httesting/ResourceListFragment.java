@@ -35,7 +35,6 @@ public class ResourceListFragment extends Fragment {
         resourceListView = (ListView)rootView.findViewById(R.id.listview_resources);
         new ReceiveData().execute();
 
-
         return rootView;
     }
 

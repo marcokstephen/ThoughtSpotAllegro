@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -46,7 +47,16 @@ public class MyActivity extends FragmentActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //We change the main fragment depending on which category the user picks to see
-                Fragment fragment = ResourceListFragment.newInstance(i);
+
+                mDrawerList.setItemChecked(i, true);
+                mDrawerLayout.closeDrawer(mDrawerList);
+                Fragment fragment;
+                if (i == 8) { //this is the "Suggest a Place" fragment, we need to use a map
+                              //instead of the regular result
+                    fragment = new SuggestPlaceFragment();
+                } else {
+                    fragment = ResourceListFragment.newInstance(i);
+                }
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container,fragment)
                         .addToBackStack(null)
@@ -58,12 +68,11 @@ public class MyActivity extends FragmentActivity {
                 if (i>0&&i<8) newTitle = newTitle.substring(4);
                 actionBar.setTitle(newTitle);
 
-                mDrawerList.setItemChecked(i, true);
-                mDrawerLayout.closeDrawer(mDrawerList);
             }
         });
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer,R.string.hello_world,R.string.hello_world);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer,R.string.hello_world,R.string.hello_world);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

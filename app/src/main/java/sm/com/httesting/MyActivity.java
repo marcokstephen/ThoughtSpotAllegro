@@ -15,8 +15,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.firebase.client.Firebase;
+
 public class MyActivity extends FragmentActivity {
 
+    public static Firebase ref;
+    public static Firebase chatRef;
     DrawerLayout mDrawerLayout;
     ListView mDrawerList;
     ActionBar actionBar;
@@ -28,6 +32,9 @@ public class MyActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
+        ref = new Firebase(getString(R.string.firebase_url));
+        chatRef = ref.child("chat");
         setContentView(R.layout.activity_my);
         actionBar = getActionBar();
 

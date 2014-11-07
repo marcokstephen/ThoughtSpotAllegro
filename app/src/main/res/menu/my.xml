@@ -8,5 +8,5 @@
     <item android:id="@+id/search_settings"
         android:title="SEARCH"
         android:orderInCategory="1"
-        android:showAsAction="always" />
+        android:showAsAction="ifRoom" />
 </menu>

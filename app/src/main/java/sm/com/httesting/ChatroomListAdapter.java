@@ -25,7 +25,7 @@ public class ChatroomListAdapter extends BaseAdapter {
     public ChatroomListAdapter(Context c, Query ref){
         this.c = c;
         this.chatRef = ref;
-        this.inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.inflater = (LayoutInflater) this.c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override

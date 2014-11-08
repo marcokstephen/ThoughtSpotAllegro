@@ -84,13 +84,15 @@ class API (webapp2.RequestHandler):
 			#populate the dictionary that stores data of each location
 			location_element = {}
 			location_element['location_id'] = record[0]
-			location_element['location_name'] = record[1]
+			location_element['location_category'] = record[1]
 			location_element['location_lat'] = record[2]
 			location_element['location_lon'] = record[3]
-			location_element['location_des'] = record[4]
-			location_element['location_category'] = record[5]
-			location_element['location_address'] = record[6]
-			location_element['location_city'] = record[7]
+			location_element['location_name'] = record[4]
+			location_element['location_address'] = record[5]
+			location_element['location_city'] = record[6]
+			location_element['location_phone'] = record[7]
+			location_element['location_email'] = record[8]
+
 			#add this location to the location list
 
 

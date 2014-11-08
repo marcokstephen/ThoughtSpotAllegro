@@ -52,13 +52,16 @@ class API (webapp2.RequestHandler):
 		location_name = cgi.escape(self.request.get('locaiton_name'))
 		location_lat = cgi.escape(self.request.get('location_lat'))
 		location_lon = cgi.escape(self.request.get('location_lon'))
-		location_desc = cgi.escape(self.request.get('location_desc'))
 		location_category = cgi.escape(self.request.get('location_category'))
 		location_address = cgi.escape(self.request.get('location_address'))
 		location_city = cgi.escape(self.request.get('location_city'))
+		location_website = cgi.escape(self.request.get('location_website'))
+		location_phone = cgi.escape(self.request.get('location_phone'))
 
-		cursor.execute('INSERT INTO locations VALUES(%s, %s, %s, %s, %s, %s, %s, %s)',(location_id, location_name, location_lat, location_lon, location_desc, location_category,location_address, location_city))
-		
+		query1 = "INSERT INTO locations (location_category, location_lat, location_lon, location_name, location_address, location_city, location_phone, location_website) VALUES"
+		query2 = "('"+ location_category +"',"+ location_lat+","+location_lon+",'"+location_name+"','"+location_address+"','"+location_city+"','"+location_phone+"','"+location_website+"')"
+		query = query1 + query2
+		cursor.execute(query)		
 		if (cursor.rowcount > 0):
 			db.commit()
 			JsonReturn['status'] = 200
@@ -74,7 +77,7 @@ class API (webapp2.RequestHandler):
 		#Put distances into an array and sort the distance array. Use the distance to map back to location ID 
 		category = cgi.escape(self.request.get('location_category'))
 		# Select All and return that Json Object
-		query = 'SELECT * FROM locations WHERE location_category like' + '"%' + category + '%"'
+		query = 'SELECT * FROM locations WHERE location_category like' + '"%' + category + '%" LIMIT 1'
 		cursor.execute(query) 
 
 		#This is the list that contains all the location, each element is an dictionary that maps  
@@ -91,7 +94,7 @@ class API (webapp2.RequestHandler):
 			location_element['location_address'] = record[5]
 			location_element['location_city'] = record[6]
 			location_element['location_phone'] = record[7]
-			location_element['location_email'] = record[8]
+			location_element['location_website'] = record[8]
 
 			#add this location to the location list
 

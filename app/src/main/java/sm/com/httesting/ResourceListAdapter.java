@@ -1,6 +1,9 @@
 package sm.com.httesting;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +52,19 @@ public class ResourceListAdapter extends BaseAdapter {
         TextView resourceComments = (TextView)convertView.findViewById(R.id.textview_resource_counter);
 
         Resource currentResource = data.get(position);
+        resourceName.setText(currentResource.get_location_name());
+        resourceAddress.setText(currentResource.get_location_address());
+        resourceCity.setText(currentResource.get_location_city());
+        resourcePhone.setText(currentResource.get_location_phone());
+
+        resourceComments.setText(currentResource.get_location_comments() + " comments");
+
+        if (resourceName.getText().toString().equals("")) resourceName.setVisibility(View.GONE);
+        if (resourceAddress.getText().toString().equals("")) resourceAddress.setVisibility(View.GONE);
+        if (resourceCity.getText().toString().equals("")) resourceCity.setVisibility(View.GONE);
+        resourceWebsite.setVisibility(View.GONE);
+        if (resourcePhone.getText().toString().equals("")) resourcePhone.setVisibility(View.GONE);
+
 
         return convertView;
     }

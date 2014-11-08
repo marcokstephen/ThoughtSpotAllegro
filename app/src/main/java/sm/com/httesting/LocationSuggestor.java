@@ -1,8 +1,14 @@
 package sm.com.httesting;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
+import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -12,11 +18,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class LocationSuggestor extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private Context ctxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_suggestor);
+        ctxt = this;
         setUpMapIfNeeded();
     }
 
@@ -64,7 +72,9 @@ public class LocationSuggestor extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+        final Context ctxt = this;
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(43.653, -79.383), 14.0f) );
         mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
@@ -76,6 +86,27 @@ public class LocationSuggestor extends FragmentActivity {
                                .title("New suggestion")
                                .draggable(true)
                 );
+                AlertDialog.Builder builder = new AlertDialog.Builder(ctxt);
+                LayoutInflater dli = (LayoutInflater) ctxt.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View mapPopup = dli.inflate(R.layout.map_popup,null);
+                builder.setView(mapPopup)
+                        .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+
+                        // show it
+                        alertDialog.show();
+
             }
         });
     }

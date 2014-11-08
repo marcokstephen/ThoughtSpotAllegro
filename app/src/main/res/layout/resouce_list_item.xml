@@ -2,7 +2,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:autoLink="phone"
         android:layout_below="@+id/textview_resource_city"
         android:id="@+id/textview_resource_phone"
         android:text="Phone"/>
@@ -41,13 +43,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textview_resource_city"
+        android:layout_alignParentBottom="true"
         android:id="@+id/textview_resource_counter"
         android:text="Comments"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autoLink="web"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textview_resource_phone"
         android:id="@+id/textview_resource_website"

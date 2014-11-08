@@ -37,6 +37,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sm.com.httesting.MyActivity" />
         </activity>
+        <activity android:name="sm.com.httesting.LocationSuggestor"
+            android:label="@string/title_activity_location_suggestor">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="sm.com.httesting.MyActivity" />
+
+        </activity>
     </application>
 
 </manifest>
+

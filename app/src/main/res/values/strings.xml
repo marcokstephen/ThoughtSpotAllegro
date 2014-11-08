@@ -8,5 +8,6 @@
     <string name="title_activity_resource_details">ResourceDetails</string>
     <string name="send_button">Send</string>
     <string name="firebase_url">https://hackathought.firebaseio.com/</string>
+    <string name="title_activity_location_suggestor">Map</string>
 
 </resources>

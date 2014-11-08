@@ -21,27 +21,28 @@ class API (webapp2.RequestHandler):
 	JsonReturn = {}
 
 	if(method == "AddUpVote"):
+		#tested 
 		#Write a method for adding up vote 
 		#This acts on the Comment Table, increment the upvote by 1
 		comment_id = cgi.escape(self.request.get('comment_id')) 
-		cursor.execute('SELECT comment_upvotes FROM comments WHERE comment_id = %i', comment_id)
+		cursor.execute('SELECT * FROM comments WHERE comment_id = %s', comment_id)
 		#Get current upvotes and increment by 1
 		row = cursor.fetchall()		
-		upvote = cursor[0]
+		upvote = int(row[0][3])
 		upvote = upvote + 1
 		#Update their database 
-		cursor.execute('UPDATE comments SET comment_upvotes = %i WHERE comment_id = %i',(upvote,comment_id))
+		cursor.execute('UPDATE comments SET comment_upvotes = %s WHERE comment_id = %s',(upvote,comment_id))
 		
 		if (cursor.rowcount > 0):
 		  db.commit()
 		  JsonReturn['status'] = 200
 		  JsonReturn['message'] = "Update Successfully"
 
-		 else:
+		else:
 		  JsonReturn['status'] = 500
 		  JsonReturn['message'] = "Error Holy Shiiiiiii" 
 
-		self.reponse.write(json.dumps(JsonReturn,sort_keys=True, indent=4, separators=(',',': '))
+		self.response.write(json.dumps(JsonReturn,sort_keys=True, indent=4, separators=(',',': ')))
 
 
 	elif(method == "AddNewLocation"):
@@ -56,12 +57,18 @@ class API (webapp2.RequestHandler):
 		location_address = cgi.escape(self.request.get('location_address'))
 		location_city = cgi.escape(self.request.get('location_city'))
 
-		cursor.execute('INSERT INTO locations VALUES(%d, %s, %f, %f, %s, %s, %s, %s)',(location_id, location_name, location_lat, location_lon, location_desc, location_category,location_address, location_city))
-		db.commit() 
+		cursor.execute('INSERT INTO locations VALUES(%s, %s, %s, %s, %s, %s, %s, %s)',(location_id, location_name, location_lat, location_lon, location_desc, location_category,location_address, location_city))
+		
+		if (cursor.rowcount > 0):
+			db.commit()
+			JsonReturn['status'] = 200
+			JsonReturn['message'] = "The Location had been added"
 
-		#Check if that pass through
+		else:
+			JsonReturn['status'] = 500
+			JsonReturn['message'] = "Error oh Shiiiiii"	 
 
-	elif(method == "GetCategoryLocation"):
+	elif(method == "GetCategoryLocation"): #tested
 		#Write a method for retrieving the location in a specific category 
 		#This method will cal the calculate_location(), add a dictionary for [distance] -> [location ID]
 		#Put distances into an array and sort the distance array. Use the distance to map back to location ID 
@@ -88,14 +95,19 @@ class API (webapp2.RequestHandler):
 
 
 			location_list.append(location_element)
+		if (cursor.rowcount > 0):
+			JsonReturn['data'] = location_list
+			JsonReturn['status'] = 200
+			JsonReturn['message'] = "The Json had been returned" 
+			self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
 
-		JsonReturn['data'] = location_list
-		JsonReturn['status'] = 200 
-		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
+		else:
+			JsonReturn['status'] = 500
+			JsonReturn['message'] = "Error"
 
-		#Check if it pass through 
+		
 
-	elif(method == "AddComment"):
+	elif(method == "AddComment"): #tested
 		#Write a method for adding a comment to a location 
 		#This acts on the Comment Table
 		comment_text = cgi.escape(self.request.get('comment_text'))
@@ -113,11 +125,11 @@ class API (webapp2.RequestHandler):
 			JsonReturn['status'] = 500
 			JsonReturn['message'] = "Insert Unsuccessfully"
 
-		self.response.write(json.dump(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
+		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
 
 
 
-	elif(method == "GetComment"):
+	elif(method == "GetComment"): #tested
 		#Write a method that retrieve the comments of a specific location 
 		# Get the location ID
 		comment_location_id = cgi.escape(self.request.get('comment_location_id'))

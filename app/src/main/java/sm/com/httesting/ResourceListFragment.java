@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -36,6 +36,7 @@ public class ResourceListFragment extends Fragment {
     private int category;
     private ListView resourceListView;
     private List<Resource> categoryData;
+    private String search_keyword = "";
 
     public static ResourceListFragment newInstance(int category){
         ResourceListFragment rlf = new ResourceListFragment();
@@ -49,7 +50,9 @@ public class ResourceListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle bundle){
         View rootView = inflater.inflate(R.layout.fragment_listing,viewGroup,false);
         category = getArguments().getInt(ARG_CATEGORY_NUMBER);
+        categoryData = new ArrayList<Resource>();
         resourceListView = (ListView)rootView.findViewById(R.id.listview_resources);
+
         new ReceiveData().execute();
 
         return rootView;
@@ -64,15 +67,35 @@ public class ResourceListFragment extends Fragment {
             //base_url + /api/GetCategoryLocation
             //post_fields: location_category
 
-            String url = getResources().getString(R.string.base_url) + "/api/GetCategoryLocation";
+            //String url = getResources().getString(R.string.base_url) + "/api/GetCategoryLocation";
+            String url = "http://104.131.180.180:8080/api/GetCategoryLocation";
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try{
-                HttpResponse httpResponse = httpClient.execute(httpPost);
+                if (category == 1){
+                    search_keyword = "Legal";
+                } else if (category == 2){
+                    search_keyword = "Health";
+                } else if (category == 3){
+                    search_keyword = "Recreation";
+                } else if (category == 4) {
+                    search_keyword = "Family";
+                } else if (category == 5) {
+                    search_keyword = "Spirituality";
+                } else if (category == 6) {
+                    search_keyword = "School";
+                } else if (category == 7) {
+                    search_keyword = "Sex";
+                } else {
+                    search_keyword = "";
+                }
+                Log.d("OUTPUT", "Search keyword is " + search_keyword);
                 List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>(2);
-                nameValuePairList.add(new BasicNameValuePair("location_category","School"));
+                nameValuePairList.add(new BasicNameValuePair("location_category",search_keyword));
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairList));
+                HttpResponse httpResponse = httpClient.execute(httpPost);
                 String output = inputStreamToString(httpResponse.getEntity().getContent()).toString();
+                Log.d("OUTPUT",output);
 
                 JSONObject jsonObject = new JSONObject(output);
                 JSONArray jsonArray = jsonObject.getJSONArray("data");

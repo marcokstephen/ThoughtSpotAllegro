@@ -1,9 +1,10 @@
 package sm.com.httesting;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -24,6 +25,9 @@ public class LocationSuggestor extends FragmentActivity {
         super.onResume();
         setUpMapIfNeeded();
     }
+
+
+
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -61,5 +65,23 @@ public class LocationSuggestor extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                //Extract info from lat lng
+                //Store this info temporarily in class object suggestedLocation
+                double [] latlng = {latLng.latitude, latLng.longitude};
+                mMap.addMarker(new MarkerOptions()
+                               .position(new LatLng(latlng[0], latlng[1]))
+                               .title("New suggestion")
+                               .draggable(true)
+                );
+            }
+        });
+    }
+    private void generate_signature() {
+        String publicKey = "KWbXqEruGQVphzOi";
+        String privateKey = "zJZKlUuxMMRpelEJ";
+
     }
 }

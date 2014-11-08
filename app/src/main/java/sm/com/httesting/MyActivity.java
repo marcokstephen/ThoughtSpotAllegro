@@ -2,13 +2,15 @@ package sm.com.httesting;
 
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +29,7 @@ public class MyActivity extends FragmentActivity {
     public static String[] sectionTitles = {"All Categories","    Legal & Financial","    Health & Social",
             "    Recreation & Culture","    Family & Friends","    Spirituality & Wellbeing",
             "    Work & School","    Sex & Relationships","Suggest a Place","Favourites","Chatrooms"};
+    Context ctxt = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +64,21 @@ public class MyActivity extends FragmentActivity {
                     //this is the "Suggest a Place" fragment, we need to use a map
                     //instead of the regular result
                     fragment = new SuggestPlaceFragment();
+                    Intent intent = new Intent(ctxt, LocationSuggestor.class);
+                    startActivity(intent);
+
                 } else if (i == 10) {
                     //This is the "Chat" fragment, we use a different fragment than normal
                     fragment = new ChatFragment();
                 } else {
                     fragment = ResourceListFragment.newInstance(i);
                 }
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container,fragment)
-                        .addToBackStack(null)
-                        .commit();
-
+                if (i != 8) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
                 //Changing the title of the action bar at the top of the app
                 //Accounting for the spaces that we added in the array elements
                 String newTitle = sectionTitles[i];

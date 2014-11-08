@@ -55,7 +55,33 @@ class API (webapp2.RequestHandler):
 	#Write a method for retrieving the location in a specific category 
 	#This method will cal the calculate_location(), add a dictionary for [distance] -> [location ID]
 	#Put distances into an array and sort the distance array. Use the distance to map back to location ID 
-		
+		category = cgi.escape(self.request.get('location_category'))
+		# Select All and return that Json Object
+		query = 'SELECT * FROM locations WHERE location_category like' + '%{' + category + '}%'
+		cursor.excute(query) 
+
+		#This is the list that contains all the location, each element is an dictionary that maps  
+		location_list = []
+
+		for record in cursor:
+			#populate the dictionary that stores data of each location
+			location_element = {}
+			location_element['location_id'] = record[0]
+			locaiton_element['location_name'] = record[1]
+			location_element['location_lat'] = record[2]
+			locaiton_element['location_lon'] = record[3]
+			location_element['location_des'] = record[4]
+			location_element['location_category'] = record[5]
+			location_element['location_address'] = record[6]
+			location_element['location_city'] = record[7]
+			#add this location to the location list
+
+			location_list.append(location_element)
+
+		JsonReturn['data'] = location_list
+		JsonReturn['status'] = 200 
+		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, seperators=(',',': ')))
+
 
 	elif(method == "AddComment"):
 	#Write a method for adding a comment to a location 

@@ -1,13 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="Title"
         android:textSize="25sp"
         android:id="@+id/textview_resource_name" />
-</LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textview_resource_name"
+        android:id="@+id/textview_resource_address"
+        android:text="Address"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textview_resource_address"
+        android:id="@+id/textview_resource_city"
+        android:text="City"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textview_resource_city"
+        android:id="@+id/textview_resource_phone"
+        android:text="Phone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textview_resource_city"
+        android:id="@+id/textview_resource_counter"
+        android:text="Comments"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textview_resource_phone"
+        android:id="@+id/textview_resource_website"
+        android:text="Website"/>
+
+</RelativeLayout>

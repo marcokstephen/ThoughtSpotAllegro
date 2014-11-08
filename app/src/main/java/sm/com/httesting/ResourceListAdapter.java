@@ -54,7 +54,7 @@ public class ResourceListAdapter extends BaseAdapter {
         resourceCity.setText(currentResource.get_location_city());
         resourcePhone.setText(currentResource.get_location_phone());
         resourceWebsite.setText(currentResource.get_location_website());
-        resourceComments.setText(currentResource.get_location_comments());
+        resourceComments.setText(currentResource.get_location_comments() + " comments");
 
         return convertView;
     }

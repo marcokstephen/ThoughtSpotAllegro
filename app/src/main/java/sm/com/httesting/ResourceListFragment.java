@@ -10,12 +10,29 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceListFragment extends Fragment {
 
     private static final String ARG_CATEGORY_NUMBER = "category_number";
+    public static final String INTENT_RESOURCE_ARG = "sm.com.httesting.INTENT_RESORUCE_ARG";
     private int category;
     private ListView resourceListView;
     private List<Resource> categoryData;
@@ -44,7 +61,32 @@ public class ResourceListFragment extends Fragment {
         protected Void doInBackground(Void... params) {
             categoryData = new ArrayList<Resource>();
             //post
-            //
+            //base_url + /api/GetCategoryLocation
+            //post_fields: location_category
+
+            String url = getResources().getString(R.string.base_url) + "/api/GetCategoryLocation";
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>(2);
+                nameValuePairList.add(new BasicNameValuePair("location_category","School"));
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairList));
+                String output = inputStreamToString(httpResponse.getEntity().getContent()).toString();
+
+                JSONObject jsonObject = new JSONObject(output);
+                JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+                for (int i = 0; i < Math.min(10, jsonArray.length()); i++){
+                    Resource resource = new Resource(jsonArray.getJSONObject(i).toString());
+                    categoryData.add(resource);
+                }
+
+            } catch (IOException e){
+                e.printStackTrace();
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
             return null;
         }
 
@@ -57,9 +99,24 @@ public class ResourceListFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(getActivity(), ResourceDetails.class);
+                    intent.putExtra(INTENT_RESOURCE_ARG,categoryData.get(position).toString());
                     startActivity(intent);
                 }
             });
+        }
+
+        public StringBuilder inputStreamToString(InputStream is){
+            String line;
+            StringBuilder sb = new StringBuilder();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            try {
+                while ((line = rd.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return sb;
         }
     }
 }

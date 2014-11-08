@@ -43,7 +43,8 @@ public class ResourceListFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             categoryData = new ArrayList<Resource>();
-            //make the network calls here
+            //post
+            //
             return null;
         }
 

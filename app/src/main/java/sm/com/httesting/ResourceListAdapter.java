@@ -49,6 +49,12 @@ public class ResourceListAdapter extends BaseAdapter {
         TextView resourceComments = (TextView)convertView.findViewById(R.id.textview_resource_counter);
 
         Resource currentResource = data.get(position);
+        resourceName.setText(currentResource.get_location_name());
+        resourceAddress.setText(currentResource.get_location_address());
+        resourceCity.setText(currentResource.get_location_city());
+        resourcePhone.setText(currentResource.get_location_phone());
+        resourceWebsite.setText(currentResource.get_location_website());
+        resourceComments.setText(currentResource.get_location_comments());
 
         return convertView;
     }

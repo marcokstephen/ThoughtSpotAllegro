@@ -8,28 +8,64 @@ class API (webapp2.RequestHandler):
 	self.response.headers['Content-Type'] = 'application/json'
 
 	if (os.getenv('SERVER_SOFTWARE') and os.getenv('SERVER_SOFTWARE').startswith('Google App Engine/')):
-         db = MySQLdb.connect(unix_socket='/cloudsql/<project-name>:<instance-name>', db='<db-name>', user='root')
+         db = MySQLdb.connect(unix_socket='/cloudsql/<project-name>:hackathought', db='hackathought', user='root')
         else:
-         db = MySQLdb.connect(host='localhost', user='root', passwd="htndjango",db="<db-name>")
-
+         db = MySQLdb.connect(host='localhost', user='root', passwd="htndjango",db="hackathought")
+	
+	#The object that contains the result from Database
 	cursor = db.cursor()
+	#The object that contains the json return
+	JsonReturn = {}
 
 	if(method == "AddUpVote"):
-	#Write a method for adding up vote 
-	#This acts on the Comment Table 
+		#Write a method for adding up vote 
+		#This acts on the Comment Table, increment the upvote by 1
+		comment_id = cgi.escape(self.request.get('comment_id')) 
+		cursor.execute('SELECT comment_upvotes FROM comments WHERE comment_id = %i', comment_id)
+		#Get current upvotes and increment by 1
+		row = cursor.fetchall()		
+		upvote = cursor[0]
+		upvote = upvote + 1
+		#Update their database 
+		cursor.execute('UPDATE comments SET comment_upvotes = %i WHERE comment_id = %i',(upvote,comment_id))
+		db.commit()
+
+		 
+	elif(method == 'testapi'):
+		#This api is used to test the class 
+		self.response.write('you have executed the test api')
+
+
 	elif(method == "AddNewLocation"):
 	#Write a method for adding a new location
 	#This acts on the Location Table 
+		location_id = cgi.escape(self.request.get('location_id'))
+		location_name = cgi.escape(self.request.get('locaiton_name'))
+		location_lat = cgi.escape(self.request.get('location_lat'))
+		location_lon = cgi.escape(self.request.get('location_lon'))
+		location_desc = cgi.escape(self.request.get('location_desc'))
+		location_category = cgi.escape(self.request.get('location_category'))
+		location_address = cgi.escape(self.request.get('location_address'))
+		location_city = cgi.escape(self.request.get('location_city'))
+
+		cursor.execute('INSERT INTO locations (%d, %s, %f, %f, %s, %s, %s, %s)',(location_id, location_name, location_lat, location_lon, location_desc, location_category,location_address, location_city))
+		db.commit() 
 
 	elif(method == "GetCategoryLocation"):
 	#Write a method for retrieving the location in a specific category 
 	#This method will cal the calculate_location(), add a dictionary for [distance] -> [location ID]
 	#Put distances into an array and sort the distance array. Use the distance to map back to location ID 
+		
 
 	elif(method == "AddComment"):
 	#Write a method for adding a comment to a location 
 	#This acts on the Comment Table
+		comment_text = cgi.escape(self.request.get('comment_text'))
+		comment_location_id = cgi.escape(self.request.get('comment_location_id')
+		#Comment_upvotes is 0 by default 	
 
+		cursor.execute('INSERT INTO comments(NULL,%d,%s,%d)'(comment_location_id,comment_text,0))
+		db.commit()
 
    def calculate_location(lg1,la1,lg2,la2):
 	#Implement a method for calculate the sum of difference between Latitude and Longitude 

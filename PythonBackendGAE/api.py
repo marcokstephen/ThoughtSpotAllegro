@@ -31,15 +31,17 @@ class API (webapp2.RequestHandler):
 		upvote = upvote + 1
 		#Update their database 
 		cursor.execute('UPDATE comments SET comment_upvotes = %i WHERE comment_id = %i',(upvote,comment_id))
-		db.commit()
+		
+		if (cursor.rowcount > 0):
+		  db.commit()
+		  JsonReturn['status'] = 200
+		  JsonReturn['message'] = "Update Successfully"
 
-		#Check if that pass through 
+		 else:
+		  JsonReturn['status'] = 500
+		  JsonReturn['message'] = "Error Holy Shiiiiiii" 
 
-
-		 
-	elif(method == 'testapi'):
-		#This api is used to test the class 
-		self.response.write('you have executed the test api')
+		self.reponse.write(json.dumps(JsonReturn,sort_keys=True, indent=4, separators=(',',': '))
 
 
 	elif(method == "AddNewLocation"):
@@ -84,6 +86,7 @@ class API (webapp2.RequestHandler):
 			location_element['location_city'] = record[7]
 			#add this location to the location list
 
+
 			location_list.append(location_element)
 
 		JsonReturn['data'] = location_list
@@ -101,6 +104,16 @@ class API (webapp2.RequestHandler):
 
 		cursor.execute('INSERT INTO comments VALUES(NULL,%s,%s,%s)',(comment_location_id,comment_text,0))
 		db.commit()
+
+		#Check that if it pass through 
+		if (cursor.rowcount > 0):
+			JsonReturn['status'] = 200
+			JsonReturn['message'] = "Sucessfully Insertted"
+		else:
+			JsonReturn['status'] = 500
+			JsonReturn['message'] = "Insert Unsuccessfully"
+
+		self.response.write(json.dump(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
 
 
 

@@ -18,7 +18,7 @@ public class ResourceListFragment extends Fragment {
     private static final String ARG_CATEGORY_NUMBER = "category_number";
     private int category;
     private ListView resourceListView;
-    private List<Object> categoryData;
+    private List<Resource> categoryData;
 
     public static ResourceListFragment newInstance(int category){
         ResourceListFragment rlf = new ResourceListFragment();
@@ -42,10 +42,7 @@ public class ResourceListFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            categoryData = new ArrayList<Object>();
-            categoryData.add("Hello");
-            categoryData.add("World");
-            categoryData.add(MyActivity.sectionTitles[category]);
+            categoryData = new ArrayList<Resource>();
             //make the network calls here
             return null;
         }

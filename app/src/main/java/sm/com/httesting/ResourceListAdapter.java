@@ -13,9 +13,9 @@ public class ResourceListAdapter extends BaseAdapter {
 
     private Context c;
     private LayoutInflater inflater;
-    private List<Object> data;
+    private List<Resource> data;
 
-    public ResourceListAdapter(Context ctxt, List<Object> data){
+    public ResourceListAdapter(Context ctxt, List<Resource> data){
         this.data = data;
         this.c = ctxt;
         inflater = (LayoutInflater)ctxt.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -41,8 +41,14 @@ public class ResourceListAdapter extends BaseAdapter {
         if (convertView == null){
             convertView = inflater.inflate(R.layout.resouce_list_item,null);
         }
-        TextView tv = (TextView)convertView.findViewById(R.id.textview_resource_name);
-        tv.setText(getItem(position).toString());
+        TextView resourceName = (TextView)convertView.findViewById(R.id.textview_resource_name);
+        TextView resourceAddress = (TextView) convertView.findViewById(R.id.textview_resource_address);
+        TextView resourceCity = (TextView)convertView.findViewById(R.id.textview_resource_city);
+        TextView resourcePhone = (TextView)convertView.findViewById(R.id.textview_resource_phone);
+        TextView resourceWebsite = (TextView)convertView.findViewById(R.id.textview_resource_website);
+        TextView resourceComments = (TextView)convertView.findViewById(R.id.textview_resource_counter);
+
+        Resource currentResource = data.get(position);
 
         return convertView;
     }

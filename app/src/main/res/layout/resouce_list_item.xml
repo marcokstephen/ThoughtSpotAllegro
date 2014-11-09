@@ -3,6 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/relativeLayout_list_item"
     android:descendantFocusability="blocksDescendants">
 
     <TextView
@@ -10,9 +11,12 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:text="Title"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:fontFamily="sans-serif-condensed"
+
         android:id="@+id/textview_resource_name" />
 
     <TextView
@@ -20,10 +24,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/textview_resource_address"
         android:text="Address"
+        android:paddingTop="11dp"
         android:layout_toEndOf="@+id/imageView2"
         android:layout_toRightOf="@id/imageView2"
         android:layout_below="@+id/textview_resource_name"
-         />
+        android:fontFamily="sans-serif"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +39,9 @@
         android:text="City"
         android:layout_below="@+id/textview_resource_address"
         android:layout_alignLeft="@+id/textview_resource_address"
-        android:layout_alignStart="@+id/textview_resource_address" />
+        android:layout_alignStart="@+id/textview_resource_address"
+        android:fontFamily="sans-serif"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,7 +51,9 @@
         android:text="Phone"
         android:layout_below="@+id/textview_resource_city"
         android:layout_alignLeft="@+id/textview_resource_city"
-        android:layout_alignStart="@+id/textview_resource_city" />
+        android:layout_alignStart="@+id/textview_resource_city"
+        android:fontFamily="sans-serif"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,8 +61,11 @@
         android:id="@+id/textview_resource_counter"
         android:text="Comments"
         android:layout_alignTop="@+id/textview_resource_website"
+        android:paddingBottom="10dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:fontFamily="sans-serif"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,8 +87,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/textview_resource_website"
         android:src="@drawable/sunrise_filler"
-        android:paddingRight="7dp"
-        android:paddingLeft="10dp"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+
         />
 
 </RelativeLayout>

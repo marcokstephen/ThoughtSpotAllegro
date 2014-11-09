@@ -1,13 +1,12 @@
 package sm.com.httesting;
 
 import android.content.Context;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -41,6 +40,7 @@ public class ResourceListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null){
             convertView = inflater.inflate(R.layout.resouce_list_item,null);
         }
@@ -50,6 +50,16 @@ public class ResourceListAdapter extends BaseAdapter {
         TextView resourcePhone = (TextView)convertView.findViewById(R.id.textview_resource_phone);
         TextView resourceWebsite = (TextView)convertView.findViewById(R.id.textview_resource_website);
         TextView resourceComments = (TextView)convertView.findViewById(R.id.textview_resource_counter);
+
+        //Set Colour Alternator
+        if (position % 2 == 0){
+            RelativeLayout rl = (RelativeLayout)convertView.findViewById(R.id.relativeLayout_list_item);
+            rl.setBackgroundColor(Color.parseColor("#B8D7FF"));
+        }
+        else{
+            RelativeLayout rl = (RelativeLayout)convertView.findViewById(R.id.relativeLayout_list_item);
+            rl.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
 
         Resource currentResource = data.get(position);
         resourceName.setText(currentResource.get_location_name());

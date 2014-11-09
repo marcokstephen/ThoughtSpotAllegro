@@ -21,7 +21,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textview_resource_details_description"
-                android:text="THIS IS A DESCRIPTION OF THE LOCATION THIS IS A DESCRIPTION OF THE LOCATION THIS IS A DESCRIPTION OF THE LOCATION"/>
+                android:text="THIS IS A DESCRIPTION OF THE LOCATION THIS IS A DESCRIPTION OF THE LOCATION THIS IS A DESCRIPTION OF THE LOCATION"
+                android:background="#004196"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="17dp"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+
+                />
+
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -32,13 +43,22 @@
                     android:id="@+id/button_add_comment"
                     android:text="@string/button_add_comment"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="#F2F7FC"
+                    android:textSize="16dp"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_marginBottom="10dp"/>
                 <Button
                     android:layout_width="0px"
                     android:id="@+id/button_add_favourite"
                     android:text="@string/button_add_favourite"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="#F2F7FC"
+                    android:textSize="16dp"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_marginBottom="10dp"
+                    />
 
             </LinearLayout>
 

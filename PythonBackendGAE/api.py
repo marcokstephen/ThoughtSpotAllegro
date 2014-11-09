@@ -49,6 +49,7 @@ class API (webapp2.RequestHandler):
 		#Write a method for adding a new location
 		#This acts on the Location Table 
 		location_id = cgi.escape(self.request.get('location_id'))
+		location_desc = cgi.escape(self.request.get('location_desc'))
 		location_name = cgi.escape(self.request.get('locaiton_name'))
 		location_lat = cgi.escape(self.request.get('location_lat'))
 		location_lon = cgi.escape(self.request.get('location_lon'))
@@ -58,8 +59,8 @@ class API (webapp2.RequestHandler):
 		location_website = cgi.escape(self.request.get('location_website'))
 		location_phone = cgi.escape(self.request.get('location_phone'))
 
-		query1 = "INSERT INTO locations (location_category, location_lat, location_lon, location_name, location_address, location_city, location_phone, location_website) VALUES"
-		query2 = "('"+ location_category +"',"+ location_lat+","+location_lon+",'"+location_name+"','"+location_address+"','"+location_city+"','"+location_phone+"','"+location_website+"')"
+		query1 = "INSERT INTO locations (location_desc,location_category, location_lat, location_lon, location_name, location_address, location_city, location_phone, location_website) VALUES"
+		query2 = "('"+location_desc+"','"+ location_category +"',"+ location_lat+","+location_lon+",'"+location_name+"','"+location_address+"','"+location_city+"','"+location_phone+"','"+location_website+"')"
 		query = query1 + query2
 		cursor.execute(query)		
 		if (cursor.rowcount > 0):
@@ -90,14 +91,15 @@ class API (webapp2.RequestHandler):
 			#populate the dictionary that stores data of each location
 			location_element = {}
 			location_element['location_id'] = record[0]
-			location_element['location_category'] = record[1]
-			location_element['location_lat'] = record[2]
-			location_element['location_lon'] = record[3]
-			location_element['location_name'] = record[4]
-			location_element['location_address'] = record[5]
-			location_element['location_city'] = record[6]
-			location_element['location_phone'] = record[7]
-			location_element['location_website'] = record[8]
+			location_element['location_desc'] = record[1]
+			location_element['location_category'] = record[2]
+			location_element['location_lat'] = record[3]
+			location_element['location_lon'] = record[4]
+			location_element['location_name'] = record[5]
+			location_element['location_address'] = record[6]
+			location_element['location_city'] = record[7]
+			location_element['location_phone'] = record[8]
+			location_element['location_website'] = record[9]
 
 			#add this location to the location list
 
@@ -192,6 +194,18 @@ class API (webapp2.RequestHandler):
    	return return_list
 
 
-   #def get_number_comment(self,location_id): 
+   def get_number_comment(self,location_id,cursor): 
+   	#This method will return the number of comments a place has 
+   	#Acts on comments table
+   	#The cursor is passed by
+
+   	cursor.execute("SELECT * FROM comments WHERE comment_location_id = %s",location_id)
+   	return cursor.rowcount
+
+
+
+
+
+
 
 

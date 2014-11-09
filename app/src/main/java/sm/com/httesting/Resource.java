@@ -14,6 +14,7 @@ public class Resource {
     private String phone;
     private String website;
     private String comments;
+    private String description;
 
     //---- CONSTRUCTORS
     public Resource()
@@ -21,7 +22,7 @@ public class Resource {
 
     }
 
-    public Resource(String locName, double locLat, double locLon, String cat, String addr, String ct, String phon, String web, String comm)
+    public Resource(String locName, String description, double locLat, double locLon, String cat, String addr, String ct, String phon, String web, String comm)
     {
         this.location_name = locName;
         this.location_lat = locLat;
@@ -32,6 +33,7 @@ public class Resource {
         this.phone = phon;
         this.website = web;
         this.comments = comm;
+        this.description = description;
     }
 
     public Resource(String inputString)
@@ -108,6 +110,11 @@ public class Resource {
         {
             this.set_location_comments(null);
         }
+        try {
+            this.set_location_description(jo.getString("location_desc"));
+        } catch (JSONException e){
+            this.set_location_description(null);
+        }
 
     }
 
@@ -157,6 +164,8 @@ public class Resource {
         return comments;
     }
 
+    public String get_location_description() { return description; }
+
     // -- SET METHODS
     public void set_location_name(String locationName)
     {
@@ -203,6 +212,8 @@ public class Resource {
         this.comments=comm;
     }
 
+    public void set_location_description(String description) { this.description=description; }
+
     // toString METHOD
     public String toString()
     {
@@ -217,6 +228,7 @@ public class Resource {
             jo.put("location_phone", this.get_location_phone());
             jo.put("location_website", this.get_location_website());
             jo.put("location_comments", this.get_location_comments());
+            jo.put("location_desc",this.get_location_description());
         } catch (JSONException e)
         {
             e.printStackTrace();

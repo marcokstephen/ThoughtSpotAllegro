@@ -150,7 +150,7 @@ class API (webapp2.RequestHandler):
 		# Get the location ID
 		comment_location_id = cgi.escape(self.request.get('comment_location_id'))
 		# Run the query
-		cursor.execute('SELECT * FROM comments WHERE comment_location_id = %s',(comment_location_id))
+		cursor.execute('SELECT * FROM comments WHERE comment_location_id = %s ORDER BY comment_upvotes DESC',(comment_location_id))
 		#Comment_list that gets input into the JsonReturn
 		comment_list = []
 		for record in cursor:

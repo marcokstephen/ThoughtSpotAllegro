@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sm.com.httesting.HelpScreen">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Help"
+            android:id="@+id/textView4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="This app is a mobile version of mythoughtspot.ca designed by students, for students. The services offered by this app:&#xD;
+Legal and Financial&#xD;
+    - Health and Social Services&#xD;
+    - Recreating and Culture&#xD;
+    - Family and Friends&#xD;
+    - Spirituality and Wellbeing&#xD;
+    - Work and school&#xD;
+    - Sex and Relationships&#xD;
+This app runs on the Android platform and requires an Android 4.0 device."
+            android:id="@+id/textView5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Features"
+            android:id="@+id/textView6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Chatroom: Provides an anonymous chatroom for uyou to communicate with another user&#xD;&#xD;
+Favourites: Save your favorite locations here&#xD;&#xD;
+Suggest a Place: If you have discovered a cool place to relax, or a place where their services helped you, please share this place with the rest of the ThoughtSpot community by choosing this option"
+            android:id="@+id/textView7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Navigation"
+            android:id="@+id/textView8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Select a category and pick a place you would like to go to based on your current needs&#xD;
+To select a place, simply tap on the place. Once you tap the place, the Details page will load and you can see more information about the selected place&#xD;
+	MAP - Takes you to Google Maps&#xD;
+	CALL - Takes you to the Dialing App&#xD;
+	WEBSITE - Takes you to Chrome Browser&#xD;
+	Write a Comment - Leave your thoughts about this place&#xD;
+	Add to Favourites - Remember your favourite places"
+            android:id="@+id/textView9" />
+    </LinearLayout>
+</LinearLayout>

@@ -2,7 +2,6 @@
 <resources>
 
     <string name="base_url">http://104.131.180.180:8080</string>
-
     <string name="app_name">HTTesting</string>
     <string name="hello_world">Hello world!</string>
     <string name="chat_message_hint">Enter your message…</string>
@@ -14,9 +13,34 @@
     <string name="button_website">Web</string>
     <string name="button_call">Call</string>
     <string name="button_maps">Map</string>
-
     <string name="button_add_favourite">Add to Favourites</string>
     <string name="button_add_comment">Write Comment</string>
     <string name="toast_map_instructions">Hold down on the map where you would like to add your suggestion!</string>
+    <string name="title_activity_help_screen">HelpScreen</string>
+    <string name="HelpStuff">"HELP
+        ====
+        This app is a mobile version of mythoughtspot.ca designed by students, for students. The services offered by this app:
+        - Legal and Financial
+        - Health and Social Services
+        - Recreating and Culture
+        - Family and Friends
+        - Spirituality and Wellbeing
+        - Work and school
+        - Sex and Relationships
+        This app runs on the Android platform and requires an Android 4.0 device.
+        Features
+        ========
+        Chatroom: Provides an anonymous chatroom for uyou to communicate with another user
+        Favourites: Save your favorite locations here
+        Suggest a Place: If you have discovered a cool place to relax, or a place where their services helped you, please share this place with the rest of the ThoughtSpot community by choosing this option
+        Navigation
+        ==========
+        Select a category and pick a place you would like to go to based on your current needs
+        To select a place, simply tap on the place. Once you tap the place, the Details page will load and you can see more information about the selected place
+        MAP - Takes you to Google Maps
+        CALL - Takes you to the Dialing App
+        WEBSITE - Takes you to Chrome Browser
+        Write a Comment - Leave your thoughts about this place
+        Add to Favourites - Remember your favourite places"</string>
 
 </resources>

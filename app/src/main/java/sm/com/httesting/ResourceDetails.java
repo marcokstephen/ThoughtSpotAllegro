@@ -1,10 +1,12 @@
 package sm.com.httesting;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +32,12 @@ public class ResourceDetails extends Activity {
         resourceObject = new Resource(object);
         setContentView(R.layout.activity_resource_details);
         ctxt = this;
+
+        TextView textViewDetails = (TextView)findViewById(R.id.textview_resource_details_description);
+        textViewDetails.setText(resourceObject.get_location_description());
+        ActionBar actionBar = getActionBar();
+        String locationName = resourceObject.get_location_name();
+        actionBar.setTitle(locationName);
 
         Button buttonWeb = (Button) findViewById(R.id.button_website);
         Button buttonCall = (Button) findViewById(R.id.button_call);

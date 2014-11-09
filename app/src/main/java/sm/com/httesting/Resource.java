@@ -219,7 +219,7 @@ public class Resource {
     {
         JSONObject jo = new JSONObject();
         try {
-            jo.put("location_name", this.get_location_address());
+            jo.put("location_name", this.get_location_name());
             jo.put("location_lat", this.get_location_lat());
             jo.put("location_lon", this.get_location_lon());
             jo.put("location_category", this.get_location_category());

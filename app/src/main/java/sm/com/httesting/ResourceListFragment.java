@@ -105,7 +105,6 @@ public class ResourceListFragment extends Fragment {
                 if (MyActivity.currentLocation == null){
                     latitude = 43.6570197;
                     longitude = -79.3804447;
-                    //Toast.makeText(ctxt,"Cannot get location, defaulting to 10 Dundas St. E.", Toast.LENGTH_SHORT).show();
                 } else {
                     latitude = MyActivity.currentLocation.getLatitude();
                     longitude = MyActivity.currentLocation.getLongitude();

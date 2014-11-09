@@ -13,6 +13,11 @@
         android:gravity="center_vertical|center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Newfound Location!"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+
         android:id="@+id/textView"
         />
 
@@ -21,11 +26,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Location Name"
+        android:fontFamily="sans-serif"
+        android:textSize="15dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
         android:id="@+id/locationname" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/et_location"
        />
 
@@ -35,10 +46,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Description"
+        android:fontFamily="sans-serif"
+        android:textSize="15dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:id="@+id/locationcomments" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_comments" />
+        android:id="@+id/et_comments"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"/>
 </LinearLayout>

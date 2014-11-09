@@ -55,7 +55,18 @@
         <activity
             android:name=".HelpScreen"
             android:label="@string/title_activity_help_screen"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sm.com.httesting.MyActivity" />
+        </activity>
+        <activity android:name=".SearchActivity"
+            android:label="Search"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MyActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sm.com.httesting.MyActivity" />

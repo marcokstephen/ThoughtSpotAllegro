@@ -3,9 +3,6 @@ package sm.com.httesting;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -24,7 +20,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONException;
+import org.json.JSONException;git
 import org.json.JSONObject;
 
 import java.io.BufferedReader;

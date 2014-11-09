@@ -13,6 +13,7 @@ public class Resource {
     private String city;
     private String phone;
     private String website;
+    private int location_id;
     private String comments;
     private String description;
 
@@ -20,20 +21,6 @@ public class Resource {
     public Resource()
     {
 
-    }
-
-    public Resource(String locName, String description, double locLat, double locLon, String cat, String addr, String ct, String phon, String web, String comm)
-    {
-        this.location_name = locName;
-        this.location_lat = locLat;
-        this.location_lon = locLon;
-        this.category = cat;
-        this.address = addr;
-        this.city = ct;
-        this.phone = phon;
-        this.website = web;
-        this.comments = comm;
-        this.description = description;
     }
 
     public Resource(String inputString)
@@ -116,6 +103,12 @@ public class Resource {
             this.set_location_description(null);
         }
 
+        try{
+            this.set_location_id(jo.getInt("location_id"));
+        } catch (JSONException e){
+            this.set_location_id(0);
+        }
+
     }
 
     // ----- GET METHODS
@@ -166,6 +159,8 @@ public class Resource {
 
     public String get_location_description() { return description; }
 
+    public int get_location_id() { return location_id; }
+
     // -- SET METHODS
     public void set_location_name(String locationName)
     {
@@ -214,6 +209,8 @@ public class Resource {
 
     public void set_location_description(String description) { this.description=description; }
 
+    public void set_location_id(int id) { this.location_id = id; }
+
     // toString METHOD
     public String toString()
     {
@@ -229,6 +226,7 @@ public class Resource {
             jo.put("location_website", this.get_location_website());
             jo.put("location_comments", this.get_location_comments());
             jo.put("location_desc",this.get_location_description());
+            jo.put("location_id",this.get_location_id());
         } catch (JSONException e)
         {
             e.printStackTrace();

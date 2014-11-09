@@ -77,6 +77,8 @@ class API (webapp2.RequestHandler):
 		#Put distances into an array and sort the distance array. Use the distance to map back to location ID 
 		category = cgi.escape(self.request.get('location_category'))
 		display = cgi.escape(self.request.get('number_result'))
+		user_lon = cgi.escape(self.request.get('user_lon'))
+		user_lan = cgi.escape(self.request.get('user_lan'))
 		# Select All and return that Json Object
 		query = 'SELECT * FROM locations WHERE location_category like' + '"%' + category + '%"'
 		cursor.execute(query) 
@@ -102,7 +104,7 @@ class API (webapp2.RequestHandler):
 
 			location_list.append(location_element)
 															#lon    #lan
-		return_list = self.sort_list_distance(location_list,-79.039,43.853,display)
+		return_list = self.sort_list_distance(location_list,user_lon,user_lan,display)
 
 		if (cursor.rowcount > 0):
 			JsonReturn['data'] = return_list

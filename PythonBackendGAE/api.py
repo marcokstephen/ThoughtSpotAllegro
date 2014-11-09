@@ -164,15 +164,15 @@ class API (webapp2.RequestHandler):
 	#Implement a method for calculate the sum of difference between Latitude and Longitude 
 	#location is a dictionary, lg and la are user coordinates
 
-	sum = math.fabs(location['location_lon']-lg) + math.fabs(location['location_lat']-la)
+	sum = math.fabs(float(location['location_lon'])-lg) + math.fabs(float(location['location_lat'])-la)
 	return sum  
    
    def sort_list_distance(self,input_list,c_lon,c_lan,display):
    	#This method sort the list base on current user longitude and latitude 
    	#This will bubble sort the list
    	#It will return the top number results, which is display
-   	c_lon = int(c_lon)
-   	c_lan = int(c_lan)
+   	c_lon = float(c_lon)
+   	c_lan = float(c_lan)
    	display = int(display)
    	list_length = len(input_list) 
    	for i in range(0,list_length - 2):
@@ -192,6 +192,6 @@ class API (webapp2.RequestHandler):
    	return return_list
 
 
-
+   #def get_number_comment(self,location_id): 
 
 

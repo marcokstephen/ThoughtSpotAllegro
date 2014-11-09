@@ -15,4 +15,7 @@
     <string name="button_call">Call</string>
     <string name="button_maps">Map</string>
 
+    <string name="button_add_favourite">Add to Favourites</string>
+    <string name="button_add_comment">Write Comment</string>
+
 </resources>

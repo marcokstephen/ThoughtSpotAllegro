@@ -24,8 +24,6 @@ public class ResourceDetails extends Activity {
         String object = bundle.getString(ResourceListFragment.INTENT_RESOURCE_ARG);
         resourceObject = new Resource(object);
         setContentView(R.layout.activity_resource_details);
-        TextView tv = (TextView)findViewById(R.id.textview_resource_details);
-        tv.setText(object);
 
         Button buttonWeb = (Button) findViewById(R.id.button_website);
         Button buttonCall = (Button) findViewById(R.id.button_call);

@@ -8,10 +8,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:text="Title"
         android:textSize="25sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:id="@+id/textview_resource_name" />
 
     <TextView
@@ -19,11 +20,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/textview_resource_address"
         android:text="Address"
-        android:layout_toStartOf="@+id/textview_resource_name"
         android:layout_toEndOf="@+id/imageView2"
         android:layout_toRightOf="@id/imageView2"
         android:layout_below="@+id/textview_resource_name"
-        android:layout_toLeftOf="@+id/textview_resource_name" />
+         />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,7 +61,8 @@
         android:text="Website"
         android:layout_below="@+id/textview_resource_phone"
         android:layout_alignLeft="@+id/textview_resource_phone"
-        android:layout_alignStart="@+id/textview_resource_phone" />
+        android:layout_alignStart="@+id/textview_resource_phone"
+        android:visibility="invisible"/>
 
     <ImageView
         android:layout_width="80dp"
@@ -72,7 +73,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/textview_resource_website"
         android:src="@drawable/sunrise_filler"
-        android:paddingRight="10dp"
+        android:paddingRight="7dp"
+        android:paddingLeft="10dp"
         />
 
 </RelativeLayout>

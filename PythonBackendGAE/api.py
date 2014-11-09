@@ -154,6 +154,7 @@ class API (webapp2.RequestHandler):
 		comment_list = []
 		for record in cursor:
 			comment_element = {}
+			comment_element['comment_id'] = record[0]
 			comment_element['comment_text'] = record[2]
 			comment_element['comment_upvotes'] = record[3]
 			comment_list.append(comment_element)

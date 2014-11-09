@@ -114,7 +114,15 @@ public class ResourceDetails extends Activity {
                                 commentText = editText.getText().toString();
                                 commentResourceId = resourceObject.get_location_id();
                                 buttonAddComment.setEnabled(false);
+                                Toast.makeText(ctxt,"Comment added!",Toast.LENGTH_SHORT);
                                 new AddComment().execute();
+                                View commentView = lf.inflate(R.layout.resource_comment_item,null);
+                                TextView comment = (TextView)commentView.findViewById(R.id.textview_user_comment);
+                                final Button helpfulButton = (Button)commentView.findViewById(R.id.button_mark_helpful);
+                                helpfulButton.setText("Mark Helpful - 0");
+                                helpfulButton.setEnabled(false);
+                                comment.setText(commentText);
+                                linearLayout.addView(commentView);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -27,6 +27,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -73,7 +76,7 @@ public class LocationSuggestor extends FragmentActivity {
     private void setUpMap() {
         final Context ctxt = this;
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(43.653, -79.383), 14.0f) );
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(43.653, -79.383), 12.0f) );
         mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
@@ -128,7 +131,51 @@ public class LocationSuggestor extends FragmentActivity {
 
             }
         });
+        new GetOtherPins().execute();
     }
+
+    public class GetOtherPins extends AsyncTask<Void,Void,Void>{
+
+        List<UserSubmittedResource> usrList;
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            usrList = new ArrayList<UserSubmittedResource>();
+
+            String url = getResources().getString(R.string.base_url) + "/api/GetUserSuggested";
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                String output = inputStreamToString(httpResponse.getEntity().getContent()).toString();
+                JSONObject jsonObject = new JSONObject(output);
+                JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject singleObject = jsonArray.getJSONObject(i);
+                    UserSubmittedResource res = new UserSubmittedResource(singleObject);
+                    usrList.add(res);
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            } catch(JSONException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            for (int i = 0; i < usrList.size(); i++){
+                UserSubmittedResource usr = usrList.get(i);
+                Log.d("OUTPUT",usr.toString());
+                mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(usr.getLat(), usr.getLon()))
+                        .title(usr.getTitle()).snippet(usr.getDescription()));
+            }
+        }
+    }
+
     public class NetworkCall extends AsyncTask<Void,Void,Void> {
         //Database call to insert user suggested location
         //Location, name, latitude, longitude, category, address, city, website, phone
@@ -170,19 +217,19 @@ public class LocationSuggestor extends FragmentActivity {
 
             return null;
         }
-        //Function that reads in stuff from the stream and creates a built string
-        public StringBuilder inputStreamToString(InputStream is){
-            String line;
-            StringBuilder sb = new StringBuilder();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            try {
-                while ((line = rd.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+    }
+    //Function that reads in stuff from the stream and creates a built string
+    public StringBuilder inputStreamToString(InputStream is){
+        String line;
+        StringBuilder sb = new StringBuilder();
+        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+        try {
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
             }
-            return sb;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return sb;
     }
 }

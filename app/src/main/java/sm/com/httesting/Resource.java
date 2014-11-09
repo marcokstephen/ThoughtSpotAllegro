@@ -92,7 +92,7 @@ public class Resource {
         }
 
         try {
-            this.set_location_comments(jo.getString("location_comments"));
+            this.set_location_comments(jo.getString("location_number_comment"));
         }catch (JSONException e)
         {
             this.set_location_comments(null);
@@ -224,7 +224,7 @@ public class Resource {
             jo.put("location_city", this.get_location_city());
             jo.put("location_phone", this.get_location_phone());
             jo.put("location_website", this.get_location_website());
-            jo.put("location_comments", this.get_location_comments());
+            jo.put("location_number_comment", this.get_location_comments());
             jo.put("location_desc",this.get_location_description());
             jo.put("location_id",this.get_location_id());
         } catch (JSONException e)

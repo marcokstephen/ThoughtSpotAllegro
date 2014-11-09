@@ -124,7 +124,7 @@ public class ResourceListFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(output);
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                for (int i = 0; i < Math.min(10, jsonArray.length()); i++){
+                for (int i = 0; i < jsonArray.length(); i++){
                     Resource resource = new Resource(jsonArray.getJSONObject(i).toString());
                     categoryData.add(resource);
                 }

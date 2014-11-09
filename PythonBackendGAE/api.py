@@ -78,7 +78,7 @@ class API (webapp2.RequestHandler):
 		category = cgi.escape(self.request.get('location_category'))
 		display = cgi.escape(self.request.get('number_result'))
 		user_lon = cgi.escape(self.request.get('user_lon'))
-		user_lan = cgi.escape(self.request.get('user_lan'))
+		user_lan = cgi.escape(self.request.get('user_lat'))
 		# Select All and return that Json Object
 		query = 'SELECT * FROM locations WHERE location_category like' + '"%' + category + '%"'
 		cursor.execute(query) 

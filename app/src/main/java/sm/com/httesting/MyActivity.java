@@ -5,6 +5,9 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -23,6 +26,7 @@ public class MyActivity extends FragmentActivity {
     public static Firebase ref;
     public static Firebase chatRef;
     DrawerLayout mDrawerLayout;
+    public static Location currentLocation;
     ListView mDrawerList;
     ActionBar actionBar;
     ActionBarDrawerToggle mDrawerToggle;
@@ -39,6 +43,7 @@ public class MyActivity extends FragmentActivity {
         chatRef = ref.child("chat");
         setContentView(R.layout.activity_my);
         actionBar = getActionBar();
+        currentLocation = getLocationObject(Criteria.ACCURACY_LOW);
 
         //Setting the initial scene: the "All Categories" view
         actionBar.setTitle(sectionTitles[0]);
@@ -95,6 +100,16 @@ public class MyActivity extends FragmentActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+    }
+
+    public Location getLocationObject(int accuracy){
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(accuracy);
+        criteria.setAltitudeRequired(false);
+        criteria.setPowerRequirement(Criteria.POWER_HIGH);
+        criteria.setBearingRequired(false);
+        return locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria,false));
     }
 
     @Override

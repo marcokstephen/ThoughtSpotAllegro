@@ -10,9 +10,18 @@
         android:id="@+id/textview_resource_details"
         android:layout_height="wrap_content" />
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textview_resource_details"
+        android:layout_toEndOf="@+id/textview_resource_details"
+        android:layout_marginLeft="176dp" />
+
     <LinearLayout style="?android:buttonBarStyle"
         android:layout_width="match_parent"
-        android:id="@+id/button_bar_details"
+        android:id="@+id/button_bar_bottom_details"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <Button style="?android:buttonBarButtonStyle"

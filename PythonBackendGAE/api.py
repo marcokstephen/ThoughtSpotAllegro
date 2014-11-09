@@ -50,7 +50,7 @@ class API (webapp2.RequestHandler):
 		#This acts on the Location Table 
 		location_id = cgi.escape(self.request.get('location_id'))
 		location_desc = cgi.escape(self.request.get('location_desc'))
-		location_name = cgi.escape(self.request.get('locaiton_name'))
+		location_name = cgi.escape(self.request.get('location_name'))
 		location_lat = cgi.escape(self.request.get('location_lat'))
 		location_lon = cgi.escape(self.request.get('location_lon'))
 		location_category = cgi.escape(self.request.get('location_category'))
@@ -114,6 +114,7 @@ class API (webapp2.RequestHandler):
 			JsonReturn['data'] = return_list
 			JsonReturn['status'] = 200
 			JsonReturn['message'] = "The Json had been returned" 
+			JsonReturn['number_msg_display'] = display
 			self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
 
 		else:
@@ -154,6 +155,7 @@ class API (webapp2.RequestHandler):
 		comment_list = []
 		for record in cursor:
 			comment_element = {}
+			comment_element['comment_id'] = record[0]
 			comment_element['comment_text'] = record[2]
 			comment_element['comment_upvotes'] = record[3]
 			comment_list.append(comment_element)
@@ -162,6 +164,42 @@ class API (webapp2.RequestHandler):
 		JsonReturn['data'] = comment_list
 		JsonReturn['status'] = 200 
 		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
+
+	elif(method=="GetUserSuggested"):
+		cursor.execute('SELECT * FROM locations WHERE location_category="user-submitted"')
+		return_list=[]
+		for record in cursor:
+			location_element={}
+			location_element['location_id'] = record[0]
+			location_element['location_desc'] = record[1]
+			location_element['location_lat'] = str(record[3])
+			location_element['location_lon'] = str(record[4])
+			location_element['location_name'] = record[5]
+
+			return_list.append(location_element)
+
+		JsonReturn['data'] = return_list
+		JsonReturn['status'] = 200
+		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))	
+
+	elif(method=="search"):
+		search = cgi.escape(self.request.get('search'))
+		query = 'SELECT * FROM locations WHERE location_name like' + '"%' + search + '%"'
+		cursor.execute(query) 
+		
+		return_list = []
+		for record in cursor:
+			location_element={}
+			location_element['location_id'] = record[0]
+			location_element['location_desc'] = record[1]
+			location_element['location_lat'] = str(record[3])
+			location_element['location_lon'] = str(record[4])
+			location_element['location_name'] = record[5]
+
+			return_list.append(location_element)
+		JsonReturn['data'] = return_list
+		JsonReturn['status'] = 200
+		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))	
 
 
    def calculate_location(self,location,lg,la):
@@ -203,11 +241,4 @@ class API (webapp2.RequestHandler):
    	cursor = db.cursor()
    	cursor.execute("SELECT * FROM comments WHERE comment_location_id = %s",location_id)
    	return cursor.rowcount
-
-
-
-
-
-
-
 

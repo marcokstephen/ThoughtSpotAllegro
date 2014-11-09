@@ -22,7 +22,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".MyActivity"
+            android:name="sm.com.httesting.MyActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
@@ -33,18 +33,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ResourceDetails"
+            android:name="sm.com.httesting.ResourceDetails"
             android:configChanges="orientation"
             android:label="@string/title_activity_resource_details"
-            android:parentActivityName=".MyActivity"
-
+            android:parentActivityName="sm.com.httesting.MyActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sm.com.httesting.MyActivity" />
         </activity>
         <activity
-            android:name=".LocationSuggestor"
+            android:name="sm.com.httesting.LocationSuggestor"
             android:configChanges="orientation"
             android:label="@string/title_activity_location_suggestor"
             android:screenOrientation="portrait" >
@@ -53,20 +52,29 @@
                 android:value="sm.com.httesting.MyActivity" />
         </activity>
         <activity
-            android:name=".HelpScreen"
-            android:label="@string/title_activity_help_screen"
+            android:name="sm.com.httesting.HelpScreen"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MyActivity" >
+            android:label="@string/title_activity_help_screen"
+            android:parentActivityName="sm.com.httesting.MyActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sm.com.httesting.MyActivity" />
         </activity>
-        <activity android:name=".SearchActivity"
-            android:label="Search"
+        <activity
+            android:name="sm.com.httesting.SearchActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MyActivity">
+            android:label="Search"
+            android:parentActivityName="sm.com.httesting.MyActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sm.com.httesting.MyActivity" />
+        </activity>
+        <activity
+            android:name="sm.com.httesting.PrefsActivity"
+            android:label="@string/title_activity_prefs"
+            android:parentActivityName="sm.com.httesting.MyActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sm.com.httesting.MyActivity" />

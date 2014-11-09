@@ -18,5 +18,6 @@
     <string name="toast_map_instructions">Hold down on the map where you would like to add your suggestion!</string>
     <string name="title_activity_help_screen">HelpScreen</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_prefs">Settings</string>
 
 </resources>

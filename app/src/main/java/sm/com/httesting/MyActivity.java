@@ -139,11 +139,11 @@ public class MyActivity extends FragmentActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         } else if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this,PrefsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.search_settings){
             Intent intent = new Intent(this,SearchActivity.class);
             startActivity(intent);
-            return true;
         }
         else if (id == R.id.Help){
             Intent intent = new Intent(ctxt, HelpScreen.class);

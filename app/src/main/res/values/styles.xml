@@ -11,8 +11,9 @@
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
     </style>
 
-    <style name="MyActionBarTitleText" parent="@style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/actionbar_text</item>
+    <style name="MyActionBarTitleText" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
 </resources>

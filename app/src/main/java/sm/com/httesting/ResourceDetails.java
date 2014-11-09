@@ -6,9 +6,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,9 @@ public class ResourceDetails extends Activity {
     LayoutInflater lf;
     private List<Comment> commentList;
 
+    SharedPreferences prefs;
+    public static final String FAVOURITE_PLACES = "sm.com.httesting.FAVOURITE_PLACES";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,7 @@ public class ResourceDetails extends Activity {
         resourceObject = new Resource(object);
         setContentView(R.layout.activity_resource_details);
         ctxt = this;
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         TextView textViewDetails = (TextView)findViewById(R.id.textview_resource_details_description);
         textViewDetails.setText(resourceObject.get_location_description());
@@ -72,8 +78,27 @@ public class ResourceDetails extends Activity {
         Button buttonWeb = (Button) findViewById(R.id.button_website);
         Button buttonCall = (Button) findViewById(R.id.button_call);
         Button buttonMap = (Button) findViewById(R.id.button_maps);
-        Button buttonAddFavourite = (Button) findViewById(R.id.button_add_favourite);
+        final Button buttonAddFavourite = (Button) findViewById(R.id.button_add_favourite);
         final Button buttonAddComment = (Button) findViewById(R.id.button_add_comment);
+
+        buttonAddFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String favourites = prefs.getString(FAVOURITE_PLACES,"[]");
+                try {
+                    JSONArray jsonArray = new JSONArray(favourites);
+                    JSONObject jsonObject = new JSONObject(resourceObject.toString());
+                    jsonArray.put(jsonObject);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString(FAVOURITE_PLACES,jsonArray.toString());
+                    editor.commit();
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+                Toast.makeText(ctxt,"Added to favourites!",Toast.LENGTH_SHORT).show();
+                buttonAddFavourite.setEnabled(false);
+            }
+        });
 
         buttonAddComment.setOnClickListener(new View.OnClickListener() {
             @Override

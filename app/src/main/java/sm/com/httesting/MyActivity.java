@@ -71,7 +71,8 @@ public class MyActivity extends FragmentActivity {
                     fragment = new SuggestPlaceFragment();
                     Intent intent = new Intent(ctxt, LocationSuggestor.class);
                     startActivity(intent);
-
+                } else if (i == 9) { //this is the favourites fragment
+                    fragment = new FavouriteListFragment();
                 } else if (i == 10) {
                     //This is the "Chat" fragment, we use a different fragment than normal
                     fragment = new ChatFragment();

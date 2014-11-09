@@ -56,15 +56,7 @@ public class ResourceListAdapter extends BaseAdapter {
         resourceAddress.setText(currentResource.get_location_address());
         resourceCity.setText(currentResource.get_location_city());
         resourcePhone.setText(currentResource.get_location_phone());
-
         resourceComments.setText(currentResource.get_location_comments() + " comments");
-
-        if (resourceName.getText().toString().equals("")) resourceName.setVisibility(View.GONE);
-        if (resourceAddress.getText().toString().equals("")) resourceAddress.setVisibility(View.GONE);
-        if (resourceCity.getText().toString().equals("")) resourceCity.setVisibility(View.GONE);
-        resourceWebsite.setVisibility(View.GONE);
-        if (resourcePhone.getText().toString().equals("")) resourcePhone.setVisibility(View.GONE);
-
 
         return convertView;
     }

@@ -76,6 +76,7 @@ class API (webapp2.RequestHandler):
 		#This method will cal the calculate_location(), add a dictionary for [distance] -> [location ID]
 		#Put distances into an array and sort the distance array. Use the distance to map back to location ID 
 		category = cgi.escape(self.request.get('location_category'))
+		display = cgi.escape(self.request.get('number_result'))
 		# Select All and return that Json Object
 		query = 'SELECT * FROM locations WHERE location_category like' + '"%' + category + '%"'
 		cursor.execute(query) 
@@ -100,8 +101,11 @@ class API (webapp2.RequestHandler):
 
 
 			location_list.append(location_element)
+															#lon    #lan
+		return_list = self.sort_list_distance(location_list,-79.039,43.853,display)
+
 		if (cursor.rowcount > 0):
-			JsonReturn['data'] = location_list
+			JsonReturn['data'] = return_list
 			JsonReturn['status'] = 200
 			JsonReturn['message'] = "The Json had been returned" 
 			self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
@@ -154,9 +158,38 @@ class API (webapp2.RequestHandler):
 		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
 
 
-   def calculate_location(lg1,la1,lg2,la2):
+   def calculate_location(self,location,lg,la):
 	#Implement a method for calculate the sum of difference between Latitude and Longitude 
+	#location is a dictionary, lg and la are user coordinates
 
-	sum = math.abs(lg1-lg2) + math.abs(la1-la2)
+	sum = math.fabs(location['location_lon']-lg) + math.fabs(location['location_lat']-la)
 	return sum  
+   
+   def sort_list_distance(self,input_list,c_lon,c_lan,display):
+   	#This method sort the list base on current user longitude and latitude 
+   	#This will bubble sort the list
+   	#It will return the top number results, which is display
+   	c_lon = int(c_lon)
+   	c_lan = int(c_lan)
+   	display = int(display)
+   	list_length = len(input_list) 
+   	for i in range(0,list_length - 2):
+   		for inner_i in range(0,list_length - 2):
+   			location = input_list[inner_i]
+   			next_location = input_list[inner_i + 1]
+
+   			if (self.calculate_location(location,c_lon,c_lan) > self.calculate_location(next_location,c_lon,c_lan)):
+   				swap = location
+   				input_list[inner_i] = next_location
+   				input_list[inner_i + 1] = swap 
+
+   	return_list = []			
+   	for i_new in range (0,display - 1):
+   		return_list.append(input_list[i_new])
+
+   	return return_list
+
+
+
+
 

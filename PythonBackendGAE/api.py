@@ -114,6 +114,7 @@ class API (webapp2.RequestHandler):
 			JsonReturn['data'] = return_list
 			JsonReturn['status'] = 200
 			JsonReturn['message'] = "The Json had been returned" 
+			JsonReturn['number_msg_display'] = display
 			self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
 
 		else:
@@ -164,6 +165,22 @@ class API (webapp2.RequestHandler):
 		JsonReturn['status'] = 200 
 		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))
 
+	elif(method=="GetUserSuggested"):
+		cursor.execute('SELECT * FROM locations WHERE location_category="user-submitted"')
+		return_list=[]
+		for record in cursor:
+			location_element={}
+			location_element['location_id'] = record[0]
+			location_element['location_desc'] = record[1]
+			location_element['location_lat'] = str(record[3])
+			location_element['location_lon'] = str(record[4])
+			location_element['location_name'] = record[5]
+
+			return_list.append(location_element)
+
+		JsonReturn['data'] = return_list
+		JsonReturn['status'] = 200
+		self.response.write(json.dumps(JsonReturn, sort_keys=True, indent=4, separators=(',',': ')))	
 
    def calculate_location(self,location,lg,la):
 	#Implement a method for calculate the sum of difference between Latitude and Longitude 

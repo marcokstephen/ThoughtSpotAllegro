@@ -17,43 +17,62 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textview_resource_name"
         android:id="@+id/textview_resource_address"
-        android:text="Address"/>
+        android:text="Address"
+        android:layout_toStartOf="@+id/textview_resource_name"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_toRightOf="@id/imageView2"
+        android:layout_below="@+id/textview_resource_name"
+        android:layout_toLeftOf="@+id/textview_resource_name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textview_resource_address"
         android:id="@+id/textview_resource_city"
-        android:text="City"/>
+        android:text="City"
+        android:layout_below="@+id/textview_resource_address"
+        android:layout_alignLeft="@+id/textview_resource_address"
+        android:layout_alignStart="@+id/textview_resource_address" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:autoLink="phone"
-        android:layout_below="@+id/textview_resource_city"
         android:id="@+id/textview_resource_phone"
-        android:text="Phone"/>
+        android:text="Phone"
+        android:layout_below="@+id/textview_resource_city"
+        android:layout_alignLeft="@+id/textview_resource_city"
+        android:layout_alignStart="@+id/textview_resource_city" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:id="@+id/textview_resource_counter"
-        android:text="Comments"/>
+        android:text="Comments"
+        android:layout_alignTop="@+id/textview_resource_website"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoLink="web"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textview_resource_phone"
         android:id="@+id/textview_resource_website"
-        android:text="Website"/>
+        android:text="Website"
+        android:layout_below="@+id/textview_resource_phone"
+        android:layout_alignLeft="@+id/textview_resource_phone"
+        android:layout_alignStart="@+id/textview_resource_phone" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/textview_resource_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/textview_resource_website"
+        android:src="@drawable/sunrise_filler"
+        android:paddingRight="10dp"
+        />
 
 </RelativeLayout>

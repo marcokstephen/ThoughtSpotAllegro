@@ -2,7 +2,6 @@
 <resources>
 
     <string name="base_url">http://104.131.180.180:8080</string>
-
     <string name="app_name">HTTesting</string>
     <string name="hello_world">Hello world!</string>
     <string name="chat_message_hint">Enter your message…</string>
@@ -14,9 +13,9 @@
     <string name="button_website">Web</string>
     <string name="button_call">Call</string>
     <string name="button_maps">Map</string>
-
     <string name="button_add_favourite">Add to Favourites</string>
     <string name="button_add_comment">Write Comment</string>
     <string name="toast_map_instructions">Hold down on the map where you would like to add your suggestion!</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 </resources>

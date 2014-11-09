@@ -109,6 +109,11 @@ public class ResourceDetails extends Activity {
                 @Override
                 public void onClick(View v) {
                     String url = resourceObject.get_location_website();
+                    if (url.startsWith("www")){
+                        url = "http://" + url;
+                    } else if (url.startsWith("Http")){
+                        url = (url.toLowerCase()).substring(0,1) + url.substring(1);
+                    }
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(url));
                     startActivity(i);

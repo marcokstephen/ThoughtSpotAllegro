@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:textStyle="bold"
+        android:textSize="16dp"
         android:id="@+id/textview_author" />
 
     <TextView

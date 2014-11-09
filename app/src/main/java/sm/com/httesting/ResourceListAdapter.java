@@ -54,7 +54,7 @@ public class ResourceListAdapter extends BaseAdapter {
         //Set Colour Alternator
         if (position % 2 == 0){
             RelativeLayout rl = (RelativeLayout)convertView.findViewById(R.id.relativeLayout_list_item);
-            rl.setBackgroundColor(Color.parseColor("#B8D7FF"));
+            rl.setBackgroundColor(Color.parseColor("#E6F2F7"));
         }
         else{
             RelativeLayout rl = (RelativeLayout)convertView.findViewById(R.id.relativeLayout_list_item);
